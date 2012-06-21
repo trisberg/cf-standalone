@@ -11,8 +11,8 @@
 	<url>http://www.springframework.org</url>
 	<description>
 		<![CDATA[
-      This project is a minimal jar utility with Spring configuration.
-    ]]>
+			This project is a minimal jar utility with Spring configuration.
+		]]>
 	</description>
 	<properties>
 		<maven.test.failure.ignore>true</maven.test.failure.ignore>
@@ -52,7 +52,29 @@
 					<target>1.5</target>
 				</configuration>
 			</plugin>
- 
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<transformers>
+								<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+									<manifestEntries>
+										<Main-Class>com.springdeveloper.demo.HelloSpring</Main-Class>
+										<Implementation-Version>${spring.framework.version}</Implementation-Version>
+									</manifestEntries>
+								</transformer>
+							</transformers>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build> 
 </project>
